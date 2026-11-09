@@ -8,7 +8,10 @@ import (
 	"testing"
 )
 
-const enunciado = "../../ejemplos/ok/enunciado.html"
+const (
+	enunciado = "../../ejemplos/ok/enunciado.html"
+	anidado   = "../../ejemplos/ok/anidado.json"
+)
 
 func TestRun(t *testing.T) {
 	dir := t.TempDir()
@@ -21,6 +24,14 @@ func TestRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	noHTML := filepath.Join(dir, "datos.txt")
+	comaSobrante := filepath.Join(dir, "coma.json")
+	if err := os.WriteFile(comaSobrante, []byte("{\"a\": 1,\n}"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	mayusculas := filepath.Join(dir, "DATOS.JSON")
+	if err := os.WriteFile(mayusculas, []byte(`[true]`), 0o644); err != nil {
+		t.Fatal(err)
+	}
 
 	tests := []struct {
 		name       string
@@ -71,7 +82,7 @@ func TestRun(t *testing.T) {
 			name: "extensión desconocida", args: []string{noHTML},
 			code: 2,
 			stderr: "munger: no se puede deducir el tipo de entrada de «" + noHTML +
-				"»: la extensión debe ser .html o .htm\nEjecute «munger -h» para ver la ayuda.\n",
+				"»: la extensión debe ser .html, .htm o .json\nEjecute «munger -h» para ver la ayuda.\n",
 		},
 		{
 			name: "fichero inexistente", args: []string{"no-existe.html"},
@@ -82,6 +93,23 @@ func TestRun(t *testing.T) {
 			name: "error sintáctico con nombre de fichero", args: []string{cruzadas},
 			code:   1,
 			stderr: "munger: " + cruzadas + ":1:7: se esperaba </b> (abierta en 1:4) y se encontró </p>\n",
+		},
+		{
+			name: "JSON en DOT", args: []string{anidado},
+			code: 0, stdout: "digraph html2graph {\n\tnode [shape=box];\n\tn0 [label=\"{}\"];\n\tn1 [label=\"biblioteca\"];\n", wantOutput: true,
+		},
+		{
+			name: "JSON en otro formato", args: []string{"-out", "gml", anidado},
+			code: 0, stdout: "graph [\n", wantOutput: true,
+		},
+		{
+			name: "extensión .JSON en mayúsculas", args: []string{"-out", "csv", mayusculas},
+			code: 0, stdout: "\"[] (0)\";\"true (1)\"\n", wantOutput: true,
+		},
+		{
+			name: "error sintáctico en un JSON", args: []string{comaSobrante},
+			code:   1,
+			stderr: "munger: " + comaSobrante + ":1:8: coma sobrante: tras ',' se esperaba otra clave y se encontró '}'\n",
 		},
 		{
 			name: "carácter de control en la entrada", args: []string{"-out", "graphml", control},

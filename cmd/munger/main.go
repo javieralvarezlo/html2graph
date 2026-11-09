@@ -1,10 +1,10 @@
-// Munger es la línea de órdenes de html2graph: lee un documento HTML bien
-// formado y escribe su árbol como un grafo en el formato pedido.
+// Munger es la línea de órdenes de html2graph: lee un documento HTML o JSON
+// bien formado y escribe su árbol como un grafo en el formato pedido.
 //
 // Es el code munger activo de Herrington completo: une los bloques del
-// programa en un pipeline (fichero → tokenizer → parser → aplanado →
-// plantilla → fichero) y no contiene lógica propia más allá de leer las
-// opciones, elegir los bloques y comunicar los errores.
+// programa en un pipeline (fichero → tokenizer → parser → transformación →
+// aplanado → plantilla → fichero) y no contiene lógica propia más allá de
+// leer las opciones, elegir los bloques y comunicar los errores.
 //
 // Uso:
 //
@@ -25,9 +25,12 @@ import (
 	"strings"
 
 	"github.com/javieralvarezlo/html2graph/internal/htmltok"
+	"github.com/javieralvarezlo/html2graph/internal/jsontok"
 	"github.com/javieralvarezlo/html2graph/internal/model"
 	"github.com/javieralvarezlo/html2graph/internal/parser"
+	"github.com/javieralvarezlo/html2graph/internal/rules"
 	"github.com/javieralvarezlo/html2graph/internal/token"
+	"github.com/javieralvarezlo/html2graph/internal/transform"
 	"github.com/javieralvarezlo/html2graph/internal/writer"
 )
 
@@ -41,9 +44,9 @@ const (
 // help es el texto de munger -h. El %s es la lista de formatos.
 const help = `Uso: munger [-out formato] [-o salida] fichero
 
-Lee un documento HTML bien formado y escribe su árbol de elementos y textos
-como un grafo. El tipo de entrada se deduce de la extensión del fichero
-(.html o .htm). Las opciones van antes del fichero.
+Lee un documento HTML o JSON bien formado y escribe su árbol como un grafo.
+El tipo de entrada se deduce de la extensión del fichero (.html o .htm para
+HTML, .json para JSON). Las opciones van antes del fichero.
 
 Opciones:
   -out formato  formato de salida: %s (por defecto, dot)
@@ -54,6 +57,7 @@ Ejemplos:
   munger ejemplos/ok/enunciado.html
   munger -o enunciado.dot ejemplos/ok/enunciado.html
   munger -out gexf -o rico.gexf ejemplos/ok/rico.html
+  munger -out graphml -o anidado.graphml ejemplos/ok/anidado.json
   munger ejemplos/ok/enunciado.html | dot -Tpng -o enunciado.png
 
 Códigos de salida: 0 correcto, 1 error en la entrada, 2 error de uso.
@@ -61,9 +65,17 @@ Códigos de salida: 0 correcto, 1 error en la entrada, 2 error de uso.
 
 // options son las opciones de una ejecución, ya comprobadas.
 type options struct {
-	input  string        // fichero de entrada
-	output string        // fichero de salida; vacío para la salida estándar
-	writer writer.Writer // escritor del formato de salida
+	input     string        // fichero de entrada
+	inputType string        // tipo de entrada: "html" o "json"
+	output    string        // fichero de salida; vacío para la salida estándar
+	writer    writer.Writer // escritor del formato de salida
+}
+
+// inputTypes asocia cada extensión de fichero con su tipo de entrada.
+var inputTypes = map[string]string{
+	".html": "html",
+	".htm":  "html",
+	".json": "json",
 }
 
 func main() {
@@ -126,13 +138,11 @@ func parseArgs(args []string) (options, error) {
 	}
 	input := flags.Arg(0)
 
-	// El tipo de entrada se deduce de la extensión. En la fase 7 la opción
-	// -in permitirá elegirlo y .json seleccionará el tokenizer y el parser
-	// JSON; por ahora solo hay entrada HTML.
-	switch strings.ToLower(filepath.Ext(input)) {
-	case ".html", ".htm":
-	default:
-		return options{}, fmt.Errorf("no se puede deducir el tipo de entrada de «%s»: la extensión debe ser .html o .htm", input)
+	// El tipo de entrada se deduce de la extensión, sin distinguir
+	// mayúsculas. En la fase 7 la opción -in permitirá elegirlo.
+	inputType, ok := inputTypes[strings.ToLower(filepath.Ext(input))]
+	if !ok {
+		return options{}, fmt.Errorf("no se puede deducir el tipo de entrada de «%s»: la extensión debe ser .html, .htm o .json", input)
 	}
 
 	// El formato se comprueba antes de leer nada: un formato inexistente es
@@ -142,20 +152,27 @@ func parseArgs(args []string) (options, error) {
 		return options{}, err
 	}
 
-	return options{input: input, output: *output, writer: w}, nil
+	return options{input: input, inputType: inputType, output: *output, writer: w}, nil
 }
 
 // convert lee el fichero de entrada y devuelve el grafo ya escrito en el
 // formato de salida. Es el pipeline del code munger: tokenizer → parser →
-// aplanado → plantilla. La salida se genera completa en memoria para no
-// dejar un fichero a medias si algo falla.
+// transformación → aplanado → plantilla. La salida se genera completa en
+// memoria para no dejar un fichero a medias si algo falla.
 func convert(opts options) ([]byte, error) {
 	src, err := readInput(opts.input)
 	if err != nil {
 		return nil, err
 	}
 
-	root, err := parser.ParseHTML(htmltok.New(src))
+	// Tokenizer y parser según el tipo de entrada.
+	var root *model.Node
+	switch opts.inputType {
+	case "json":
+		root, err = parser.ParseJSON(jsontok.New(src))
+	default:
+		root, err = parser.ParseHTML(htmltok.New(src))
+	}
 	if err != nil {
 		// Los errores léxicos y sintácticos llevan línea y columna; con el
 		// nombre del fichero delante quedan como fichero:línea:columna.
@@ -166,8 +183,12 @@ func convert(opts options) ([]byte, error) {
 		return nil, fmt.Errorf("%s: %w", opts.input, err)
 	}
 
-	// Aquí entrará en la fase 5 la transformación del árbol según las
-	// reglas: root = transform.Apply(root, rules.Default{}).
+	// Transformación del árbol según las reglas. La CLI usa siempre las
+	// reglas por defecto, que dejan el árbol igual y nunca fallan.
+	root, err = transform.Apply(root, rules.Default{})
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", opts.input, err)
+	}
 
 	var out bytes.Buffer
 	if err := opts.writer.Write(&out, model.Flatten(root)); err != nil {

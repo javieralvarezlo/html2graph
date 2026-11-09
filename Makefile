@@ -1,7 +1,7 @@
 # Makefile de html2graph.
 #
 # Objetivos:
-#   make build     compila todos los paquetes
+#   make build     compila todos los paquetes y genera bin/munger
 #   make test      comprueba el formato (sin tocar nada), go vet y los tests
 #   make fmtcheck  falla si algún fichero no está formateado con gofmt
 #   make vet       solo go vet
@@ -18,8 +18,11 @@ GO ?= go
 
 all: test build
 
+# El binario se llama bin/munger en Linux y macOS y bin/munger.exe en
+# Windows: GOEXE es la extensión de los ejecutables del sistema.
 build:
 	$(GO) build ./...
+	$(GO) build -o bin/munger$(shell $(GO) env GOEXE) ./cmd/munger
 
 test: fmtcheck vet
 	$(GO) test ./...
