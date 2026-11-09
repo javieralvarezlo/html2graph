@@ -89,15 +89,8 @@ var nodeKindNames = map[NodeKind]string{
 	JSONValue:  "value",
 }
 
-// String devuelve el nombre legible de una clase de nodo.
-//
-// Entrada: la clase k.
-// Salida: su nombre en minúsculas (por ejemplo "element"), o "NodeKind(n)"
-// si k no es una de las clases definidas.
-// Pasos:
-//  1. Buscar k en la tabla de nombres.
-//  2. Si está, devolver su nombre.
-//  3. Si no está, devolver "NodeKind(" + valor numérico de k + ")".
+// String devuelve el nombre legible de una clase de nodo, en minúsculas
+// (por ejemplo "element"), o "NodeKind(n)" si k no es una clase definida.
 func (k NodeKind) String() string {
 	kindName, ok := nodeKindNames[k]
 	if ok {
@@ -136,7 +129,8 @@ func NewNode(kind NodeKind, label string) *Node {
 	return &Node{Kind: kind, Label: label}
 }
 
-// AppendChild añade un hijo al final de la lista de hijos de n.
+// AppendChild añade c al final de la lista de hijos de n y devuelve c, para
+// poder seguir usándolo (por ejemplo, apilarlo) en la misma línea.
 func (n *Node) AppendChild(c *Node) *Node {
 	n.Children = append(n.Children, c)
 	return c

@@ -16,19 +16,13 @@ type PosError struct {
 	Msg  string
 }
 
-// Error devuelve el mensaje completo del error.
-//
-// Entrada: el error e.
-// Salida: la cadena "línea:columna: mensaje".
+// Error devuelve el mensaje completo: "línea:columna: mensaje".
 func (e *PosError) Error() string {
 	return fmt.Sprintf("%d:%d: %s", e.Line, e.Col, e.Msg)
 }
 
-// Errorf construye un PosError con un mensaje formateado.
-//
-// Entrada: la línea y la columna del error, una plantilla de mensaje y sus
-// argumentos (con la sintaxis de fmt.Sprintf).
-// Salida: un *PosError con esa posición y el mensaje ya formateado.
+// Errorf construye un PosError en la posición line:col, con el mensaje
+// formateado como en fmt.Sprintf.
 func Errorf(line, col int, format string, args ...any) *PosError {
 	return &PosError{Line: line, Col: col, Msg: fmt.Sprintf(format, args...)}
 }

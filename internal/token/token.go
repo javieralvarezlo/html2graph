@@ -12,7 +12,7 @@
 //
 // # Contenido del paquete
 //
-//   - Kind: enumeración de las clases de token (HTML, JSON y EOF).
+//   - Kind: enumeración de las clases de token (HTML, JSON, EOF e Invalid).
 //   - Attr: par nombre/valor de un atributo HTML.
 //   - Token: unidad léxica con su clase, su valor, sus atributos y la
 //     posición (línea y columna) de su primer carácter.
@@ -20,6 +20,8 @@
 //     siguiente token o un error.
 //   - PosError: error con posición, de formato "línea:columna: mensaje",
 //     usado por tokenizers y parsers para informar de cualquier fallo.
+//   - Reader: lector de caracteres con posición, común a los tokenizers.
+//   - IsSpace: definición de espacio en blanco común a tokenizers y parsers.
 //
 // # Convenciones de posición
 //
@@ -37,12 +39,13 @@ import "fmt"
 //   - JSON: LBrace, RBrace, LBracket, RBracket, Colon, Comma, String,
 //     Number, True, False, Null.
 //   - Ambos: EOF, que marca el final de la entrada.
+//   - Invalid: valor 0, el de un Token sin inicializar. Ningún tokenizer lo
+//     produce; si aparece, es que alguien usó el token de un error.
 type Kind int
 
-// Clases de token. EOF vale 0 para que un Token sin inicializar no se
-// confunda con ningún token con contenido.
 const (
-	EOF Kind = iota // fin de la entrada
+	Invalid Kind = iota // token sin inicializar (nunca lo emite un tokenizer)
+	EOF                 // fin de la entrada
 
 	// HTML
 	StartTag    // etiqueta de apertura: <p>, <a href="...">
@@ -68,6 +71,7 @@ const (
 
 // kindNames asocia a cada Kind su nombre legible.
 var kindNames = map[Kind]string{
+	Invalid:     "Invalid",
 	EOF:         "EOF",
 	StartTag:    "StartTag",
 	EndTag:      "EndTag",
@@ -98,8 +102,9 @@ func (k Kind) String() string {
 	return fmt.Sprintf("Kind(%d)", int(k))
 }
 
-// Attr es un atributo HTML: un nombre (en minúsculas).
-// Un atributo sin valor (<input disabled>) tiene Value vacío.
+// Attr es un atributo HTML: su nombre, en minúsculas, y su valor, con las
+// entidades ya resueltas. Un atributo sin valor (<input disabled>) tiene
+// Value vacío.
 type Attr struct {
 	Name  string
 	Value string
@@ -126,12 +131,11 @@ type Token struct {
 }
 
 // String devuelve una representación compacta del token, pensada para
-// tests y depuración.
-//
-// Entrada: el token t.
-// Salida: una cadena con el formato
+// tests y depuración, con el formato
 //
 //	línea:columna Clase "valor" [nombre="valor" ...]
+//
+// donde el valor y los atributos se omiten si están vacíos.
 func (t Token) String() string {
 	s := fmt.Sprintf("%d:%d %s", t.Line, t.Col, t.Kind)
 	if t.Value != "" {
@@ -152,16 +156,11 @@ func (t Token) String() string {
 
 // Tokenizer es la interfaz que implementan los tokenizers de HTML y JSON.
 //
-// Next devuelve el siguiente token de la entrada.
-//
-// Entrada: ninguna (el tokenizer guarda internamente su posición).
-// Salida: el siguiente token y un error nulo; o un token cualquiera y un
-// error (normalmente *PosError) si la entrada es léxicamente incorrecta.
-// Contrato:
-//  1. Al agotarse la entrada se devuelve un token EOF con la posición
-//     siguiente al último carácter.
-//  2. Una vez devuelto EOF o un error, las llamadas posteriores repiten ese
-//     mismo resultado.
+// Next devuelve el siguiente token de la entrada, o un error (un *PosError)
+// si la entrada es léxicamente incorrecta; en ese caso el token devuelto es
+// el vacío, de clase Invalid. Al agotarse la entrada devuelve un token EOF
+// con la posición siguiente al último carácter. Una vez devuelto EOF o un
+// error, las llamadas posteriores repiten ese mismo resultado.
 type Tokenizer interface {
 	Next() (Token, error)
 }

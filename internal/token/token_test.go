@@ -11,6 +11,7 @@ func TestKindString(t *testing.T) {
 		k    Kind
 		want string
 	}{
+		{Invalid, "Invalid"},
 		{EOF, "EOF"},
 		{StartTag, "StartTag"},
 		{EndTag, "EndTag"},
@@ -42,7 +43,7 @@ func TestKindString(t *testing.T) {
 // TestKindNamesCompleto comprueba que ninguna clase se ha quedado sin nombre
 // en la tabla (por ejemplo, al añadir una constante nueva).
 func TestKindNamesCompleto(t *testing.T) {
-	for k := EOF; k <= Null; k++ {
+	for k := Invalid; k <= Null; k++ {
 		if kindNames[k] == "" {
 			t.Errorf("la clase %d no tiene nombre", int(k))
 		}
