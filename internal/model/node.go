@@ -13,6 +13,8 @@
 //     árbol aparte: un árbol se representa por su nodo raíz, y el resto
 //     se alcanza recorriendo recursivamente la lista de hijos.
 //   - graph.go: el grafo aplanado (Graph, GraphNode, GraphEdge).
+//   - debug.go: Dump, que escribe un árbol como texto con sangría para
+//     los tests y la depuración.
 package model
 
 import "fmt"
