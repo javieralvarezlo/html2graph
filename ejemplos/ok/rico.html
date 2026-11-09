@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- Caso de prueba 2: un HTML rico con tabla, lista, formulario, imagen,
+     elementos vacíos (con y sin barra), entidades y atributos variados. -->
+<html lang="es">
+ <head>
+  <meta charset="utf-8">
+  <title>Librería &amp; café</title>
+ </head>
+ <body>
+  <h1 id="inicio">Novedades</h1>
+  <img src="portada.png" alt="Portada del mes" width="120"/>
+  <p>Precios &lt;con IVA&gt;<br>desde&nbsp;9,95&#160;&#x20AC;</p>
+  <ul class="secciones">
+   <li>Novela</li>
+   <li>Ensayo &#38; poesía</li>
+  </ul>
+  <table border="1">
+   <tr><th>Título</th><th>Precio</th></tr>
+   <tr><td>Niebla</td><td>12&nbsp;&euro;</td></tr>
+  </table>
+  <form action="/pedido" method="post">
+   <label for="correo">Correo</label>
+   <input type="email" id="correo" name="correo" required>
+   <input type="checkbox" name="aviso" checked/>
+   <hr/>
+   <button type="submit">Enviar</button>
+  </form>
+ </body>
+</html>

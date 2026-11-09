@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://gexf.net/1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta>
+    <creator>html2graph</creator>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node">
+      <attribute id="kind" title="kind" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="n0" label="html lang=&quot;es&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n1" label="head"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n2" label="meta charset=&quot;utf-8&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n3" label="title"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n4" label="Librería &amp; café"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n5" label="body"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n6" label="h1 id=&quot;inicio&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n7" label="Novedades"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n8" label="img src=&quot;portada.png&quot; alt=&quot;Portada del mes&quot; width=&quot;120&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n9" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n10" label="Precios &lt;con IVA&gt;"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n11" label="br"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n12" label="desde 9,95 €"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n13" label="ul class=&quot;secciones&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n14" label="li"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n15" label="Novela"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n16" label="li"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n17" label="Ensayo &amp; poesía"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n18" label="table border=&quot;1&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n19" label="tr"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n20" label="th"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n21" label="Título"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n22" label="th"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n23" label="Precio"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n24" label="tr"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n25" label="td"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n26" label="Niebla"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n27" label="td"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n28" label="12 &amp;euro;"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n29" label="form action=&quot;/pedido&quot; method=&quot;post&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n30" label="label for=&quot;correo&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n31" label="Correo"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n32" label="input type=&quot;email&quot; id=&quot;correo&quot; name=&quot;correo&quot; required=&quot;&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n33" label="input type=&quot;checkbox&quot; name=&quot;aviso&quot; checked=&quot;&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n34" label="hr"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n35" label="button type=&quot;submit&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n36" label="Enviar"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+    </nodes>
+    <edges>
+      <edge id="e0" source="n0" target="n1"/>
+      <edge id="e1" source="n1" target="n2"/>
+      <edge id="e2" source="n1" target="n3"/>
+      <edge id="e3" source="n3" target="n4"/>
+      <edge id="e4" source="n0" target="n5"/>
+      <edge id="e5" source="n5" target="n6"/>
+      <edge id="e6" source="n6" target="n7"/>
+      <edge id="e7" source="n5" target="n8"/>
+      <edge id="e8" source="n5" target="n9"/>
+      <edge id="e9" source="n9" target="n10"/>
+      <edge id="e10" source="n9" target="n11"/>
+      <edge id="e11" source="n9" target="n12"/>
+      <edge id="e12" source="n5" target="n13"/>
+      <edge id="e13" source="n13" target="n14"/>
+      <edge id="e14" source="n14" target="n15"/>
+      <edge id="e15" source="n13" target="n16"/>
+      <edge id="e16" source="n16" target="n17"/>
+      <edge id="e17" source="n5" target="n18"/>
+      <edge id="e18" source="n18" target="n19"/>
+      <edge id="e19" source="n19" target="n20"/>
+      <edge id="e20" source="n20" target="n21"/>
+      <edge id="e21" source="n19" target="n22"/>
+      <edge id="e22" source="n22" target="n23"/>
+      <edge id="e23" source="n18" target="n24"/>
+      <edge id="e24" source="n24" target="n25"/>
+      <edge id="e25" source="n25" target="n26"/>
+      <edge id="e26" source="n24" target="n27"/>
+      <edge id="e27" source="n27" target="n28"/>
+      <edge id="e28" source="n5" target="n29"/>
+      <edge id="e29" source="n29" target="n30"/>
+      <edge id="e30" source="n30" target="n31"/>
+      <edge id="e31" source="n29" target="n32"/>
+      <edge id="e32" source="n29" target="n33"/>
+      <edge id="e33" source="n29" target="n34"/>
+      <edge id="e34" source="n29" target="n35"/>
+      <edge id="e35" source="n35" target="n36"/>
+    </edges>
+  </graph>
+</gexf>

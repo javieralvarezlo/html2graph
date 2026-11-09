@@ -28,9 +28,10 @@ type Reader struct {
 // marca de orden de bytes (U+FEFF) inicial y convierte "\r\n" y "\r" en
 // "\n", para que los ficheros de Windows y de Unix cuenten las líneas igual.
 //
-// Si src no es UTF-8 válido, el Reader queda vacío y Err devuelve un
-// *PosError con la posición del primer byte incorrecto: no se intenta
-// adivinar la codificación ni sustituir los bytes erróneos.
+// Si src no es UTF-8 válido, o contiene un carácter que no cumple
+// IsAllowed, el Reader queda vacío y Err devuelve un *PosError con la
+// posición del primer byte o carácter incorrecto: no se intenta adivinar la
+// codificación ni sustituir o eliminar lo que sobra.
 func NewReader(src string) *Reader {
 	src = strings.TrimPrefix(src, "\uFEFF")
 	src = strings.ReplaceAll(src, "\r\n", "\n")
@@ -39,6 +40,10 @@ func NewReader(src string) *Reader {
 	r := &Reader{line: 1, col: 1}
 	if !utf8.ValidString(src) {
 		r.err = invalidUTF8(src)
+		return r
+	}
+	if err := disallowedChar(src); err != nil {
+		r.err = err
 		return r
 	}
 
@@ -72,7 +77,32 @@ func invalidUTF8(src string) error {
 	return nil
 }
 
-// Err devuelve el error de codificación detectado al crear el Reader, o nil.
+// disallowedChar devuelve el error que señala el primer carácter de src que
+// no cumple IsAllowed, o nil si no hay ninguno. src ya es UTF-8 válido.
+func disallowedChar(src string) error {
+	line, col := 1, 1
+	for _, c := range src {
+		if !IsAllowed(c) {
+			kind := "carácter de control"
+			if !unicode.IsControl(c) {
+				kind = "no-carácter Unicode"
+			}
+			return Errorf(line, col,
+				"%s U+%04X no admitido: no puede representarse en las salidas XML; elimínelo del fichero", kind, c)
+		}
+
+		if c == '\n' {
+			line, col = line+1, 1
+		} else {
+			col++
+		}
+	}
+
+	return nil
+}
+
+// Err devuelve el error de codificación o de carácter no admitido detectado
+// al crear el Reader, o nil.
 func (r *Reader) Err() error {
 	return r.err
 }
@@ -167,9 +197,43 @@ func (r *Reader) Pos() (line, col int) {
 // espacio del proyecto: la usan el tokenizer HTML para separar atributos y
 // el parser para limpiar los textos.
 //
+// El salto de página (U+000C) se incluye por coherencia con la definición de
+// espacio de HTML, pero nunca llega a usarse: XML 1.0 no lo admite, así que
+// IsAllowed lo rechaza y el lector no deja pasar ningún fichero que lo
+// contenga.
+//
 // A propósito no incluye U+00A0 (el espacio de no separación de &nbsp;) ni
 // otros espacios Unicode, de modo que un &nbsp; nunca se colapsa ni se
 // recorta al limpiar un texto.
 func IsSpace(c rune) bool {
 	return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f'
+}
+
+// IsAllowed indica si c puede aparecer en un documento de entrada. Es la
+// única definición del proyecto de los caracteres admitidos: todos ellos
+// deben poder escribirse en las salidas XML (GraphML y GEXF), así que se
+// siguen las reglas de XML 1.0 y, además, se excluyen los caracteres que
+// XML desaconseja (los de control C1 y los no-caracteres). Se rechazan los códigos
+// que no son caracteres Unicode (0, las mitades de par sustituto y los
+// mayores que U+10FFFF), los caracteres de control salvo el tabulador, el
+// salto de línea y el retorno de carro (también DEL y los de control C1,
+// U+007F a U+009F) y los no-caracteres (U+FDD0 a U+FDEF y los que acaban en
+// FFFE o FFFF).
+//
+// La usan el lector, para rechazar los caracteres escritos tal cual en el
+// fichero, los tokenizers, para los que producen sus entidades o escapes, y
+// los escritores, como defensa ante etiquetas construidas a mano.
+func IsAllowed(c rune) bool {
+	switch {
+	case c <= 0 || !utf8.ValidRune(c):
+		return false
+	case unicode.IsControl(c):
+		return c == '\t' || c == '\n' || c == '\r'
+	case c >= 0xFDD0 && c <= 0xFDEF:
+		return false
+	case c&0xFFFE == 0xFFFE:
+		return false
+	}
+
+	return true
 }

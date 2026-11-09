@@ -1,0 +1,38 @@
+digraph html2graph {
+	node [shape=box];
+	n0 [label="html"];
+	n1 [label="head"];
+	n2 [label="title"];
+	n3 [label="Hoja de enlaces"];
+	n4 [label="body"];
+	n5 [label="h1"];
+	n6 [label="Ejemplo2"];
+	n7 [label="p"];
+	n8 [label="Este texto tiene un"];
+	n9 [label="a href=\"http://www.issi.uned.es\""];
+	n10 [label="enlace"];
+	n11 [label="y un texto con"];
+	n12 [label="em"];
+	n13 [label="énfasis"];
+	n14 [label="p"];
+	n15 [label="Este texto NO tiene otro enlace y un texto con"];
+	n16 [label="b"];
+	n17 [label="negrita"];
+	n0 -> n1;
+	n1 -> n2;
+	n2 -> n3;
+	n0 -> n4;
+	n4 -> n5;
+	n5 -> n6;
+	n4 -> n7;
+	n7 -> n8;
+	n7 -> n9;
+	n9 -> n10;
+	n7 -> n11;
+	n7 -> n12;
+	n12 -> n13;
+	n4 -> n14;
+	n14 -> n15;
+	n14 -> n16;
+	n16 -> n17;
+}

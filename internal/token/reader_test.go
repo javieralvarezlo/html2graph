@@ -129,6 +129,71 @@ func TestReaderUTF8Invalido(t *testing.T) {
 	}
 }
 
+func TestReaderCaracterNoAdmitido(t *testing.T) {
+	tests := []struct {
+		name string
+		src  string
+		want string
+	}{
+		{"tabulador vertical", "<p>t\vv</p>", "1:5: carácter de control U+000B no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"carácter nulo", "a\x00", "1:2: carácter de control U+0000 no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"salto de página", "a\nb\fc", "2:2: carácter de control U+000C no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"control C1 tras un salto de Windows", "a\r\néx\u0085", "2:3: carácter de control U+0085 no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"no-carácter FFFE", "ab\uFFFE", "1:3: no-carácter Unicode U+FFFE no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"no-carácter FDD0", "\n\n\uFDD0", "3:1: no-carácter Unicode U+FDD0 no admitido: no puede representarse en las salidas XML; elimínelo del fichero"},
+		{"UTF-8 inválido antes que el control", "\v\xe9", "1:2: el fichero no está codificado en UTF-8 (byte 0xE9 inválido); conviértalo a UTF-8"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			r := NewReader(tt.src)
+			if r.Err() == nil || r.Err().Error() != tt.want {
+				t.Fatalf("Err() = %v, se esperaba %q", r.Err(), tt.want)
+			}
+			if _, ok := r.Peek(); ok {
+				t.Error("un Reader con error debe estar vacío")
+			}
+		})
+	}
+
+	// Tabulador, saltos de línea, retorno de carro y U+00A0 se admiten.
+	if err := NewReader("a\tb\nc\r\nd\re\u00a0f").Err(); err != nil {
+		t.Errorf("carácter admitido rechazado: %v", err)
+	}
+}
+
+func TestIsAllowed(t *testing.T) {
+	tests := []struct {
+		c    rune
+		want bool
+	}{
+		{'a', true},
+		{'\t', true},
+		{'\n', true},
+		{'\r', true},
+		{'\u00a0', true},
+		{'\uFFFD', true},
+		{0x1F600, true},
+		{0, false},
+		{'\v', false},
+		{'\f', false},
+		{0x7F, false},
+		{0x85, false},
+		{0x9F, false},
+		{0xD800, false},
+		{0xFDD0, false},
+		{0xFDEF, false},
+		{0xFFFE, false},
+		{0x1FFFF, false},
+		{0x110000, false},
+		{-1, false},
+	}
+	for _, tt := range tests {
+		if got := IsAllowed(tt.c); got != tt.want {
+			t.Errorf("IsAllowed(%U) = %v, se esperaba %v", tt.c, got, tt.want)
+		}
+	}
+}
+
 func TestIsSpace(t *testing.T) {
 	for _, c := range " \t\n\r\f" {
 		if !IsSpace(c) {

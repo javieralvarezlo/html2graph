@@ -1,0 +1,17 @@
+{{- /*
+Graphviz DOT: un grafo dirigido con un nodo nN por cada nodo del grafo
+aplanado y una arista nA -> nB por cada relación padre → hijo. Todos los
+nodos son rectángulos, que acomodan mejor los textos largos que la elipse
+por defecto. Las etiquetas van entre comillas y escapadas con dot; una
+etiqueta muy larga sale como varias cadenas unidas con + ("a" + "b"),
+porque Graphviz no admite cadenas de más de 16384 bytes.
+*/ -}}
+digraph html2graph {
+	node [shape=box];
+{{- range .Nodes}}
+	n{{.ID}} [label="{{dot .Label}}"];
+{{- end}}
+{{- range .Edges}}
+	n{{.From}} -> n{{.To}};
+{{- end}}
+}

@@ -1,0 +1,36 @@
+digraph html2graph {
+	node [shape=box];
+	n0 [label="div"];
+	n1 [label="p"];
+	n2 [label="Este es un párrafo deliberadamente largo, sin ningún salto de línea, para ver cómo dibuja cada herramienta una etiqueta de varios cientos de caracteres: Graphviz no parte las etiquetas, así que el rectángulo del nodo se estira a lo ancho hasta ocupar toda la imagen, y Gephi o yEd la escriben en una sola línea que tapa a los nodos vecinos."];
+	n3 [label="input type=\"text\" id=\"buscar\" name=\"q\" value=\"\" placeholder=\"Buscar...\" maxlength=\"80\" size=\"40\" autocomplete=\"off\" spellcheck=\"false\" required=\"\" disabled=\"\""];
+	n4 [label="div"];
+	n5 [label="div"];
+	n6 [label="div"];
+	n7 [label="div"];
+	n8 [label="div"];
+	n9 [label="div"];
+	n10 [label="div"];
+	n11 [label="div"];
+	n12 [label="div"];
+	n13 [label="span"];
+	n14 [label="em"];
+	n15 [label="b"];
+	n16 [label="profundo"];
+	n0 -> n1;
+	n1 -> n2;
+	n0 -> n3;
+	n0 -> n4;
+	n4 -> n5;
+	n5 -> n6;
+	n6 -> n7;
+	n7 -> n8;
+	n8 -> n9;
+	n9 -> n10;
+	n10 -> n11;
+	n11 -> n12;
+	n12 -> n13;
+	n13 -> n14;
+	n14 -> n15;
+	n15 -> n16;
+}

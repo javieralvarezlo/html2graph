@@ -1,0 +1,25 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'ul',element
+n1,'li',element
+n2,'x',text
+n3,'li',element
+n4,'x',text
+n5,'li',element
+n6,'x',text
+n7,'li',element
+n8,'p',element
+n9,'p',text
+n10,'p',element
+n11,'li',text
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+n0,n1,true
+n1,n2,true
+n0,n3,true
+n3,n4,true
+n0,n5,true
+n5,n6,true
+n0,n7,true
+n7,n8,true
+n8,n9,true
+n7,n10,true
+n10,n11,true

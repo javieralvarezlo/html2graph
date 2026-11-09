@@ -1,0 +1,4 @@
+digraph html2graph {
+	node [shape=box];
+	n0 [label="br"];
+}

@@ -1,0 +1,39 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'div title=\'di "hola"\' data-vacio="" data-apos="it\'s"',element
+n1,'p',element
+n2,'comillas "dobles" y \'simples\', coma, punto y coma; fin',text
+n3,'p',element
+n4,'& <b\> "x" \'y\' &quot; &#233;',text
+n5,'p',element
+n6,'barra \\ invertida, \\n no es un salto, termina en barra \\',text
+n7,'p',element
+n8,'\'a\', \'b\'',text
+n9,'p',element
+n10,'a b y c  d',text
+n11,'p',element
+n12,'emoji 😀 y letras ñ ü 日本語 Ελληνικά العربية',text
+n13,'p',element
+n14,'edgedef\> en un texto',text
+n15,'p',element
+n16,'null',text
+n17,'p',element
+n18,'[corchetes] y #almohadilla',text
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+n0,n1,true
+n1,n2,true
+n0,n3,true
+n3,n4,true
+n0,n5,true
+n5,n6,true
+n0,n7,true
+n7,n8,true
+n0,n9,true
+n9,n10,true
+n0,n11,true
+n11,n12,true
+n0,n13,true
+n13,n14,true
+n0,n15,true
+n15,n16,true
+n0,n17,true
+n17,n18,true

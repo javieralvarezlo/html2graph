@@ -1,0 +1,23 @@
+{{- /*
+GraphSON 1.0 (el formato JSON de TinkerPop 2/Blueprints, modo NORMAL): un
+objeto JSON con las claves mode, vertices y edges. Cada
+vértice lleva su identificador nN (_id), _type "vertex" y dos propiedades:
+label (la etiqueta de presentación) y kind (la clase del nodo). Cada arista
+eI lleva _type "edge", el vértice de salida (_outV, el padre), el de
+llegada (_inV, el hijo) y la etiqueta de la relación, child. Las cadenas se
+escapan con json. La coma se escribe delante de cada elemento salvo el
+primero, porque JSON no admite una coma tras el último.
+*/ -}}
+{
+  "mode": "NORMAL",
+  "vertices": [
+{{- range $i, $n := .Nodes}}{{if $i}},{{end}}
+    {"_id": "n{{$n.ID}}", "_type": "vertex", "label": "{{json $n.Label}}", "kind": "{{$n.Kind}}"}
+{{- end}}
+  ],
+  "edges": [
+{{- range $i, $e := .Edges}}{{if $i}},{{end}}
+    {"_id": "e{{$i}}", "_type": "edge", "_outV": "n{{$e.From}}", "_inV": "n{{$e.To}}", "_label": "child"}
+{{- end}}
+  ]
+}

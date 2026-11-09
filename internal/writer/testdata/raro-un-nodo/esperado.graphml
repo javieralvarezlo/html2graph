@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="kind" for="node" attr.name="kind" attr.type="string"/>
+  <graph id="html2graph" edgedefault="directed">
+    <node id="n0"><data key="label">br</data><data key="kind">element</data></node>
+  </graph>
+</graphml>

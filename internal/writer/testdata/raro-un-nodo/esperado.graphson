@@ -1,0 +1,8 @@
+{
+  "mode": "NORMAL",
+  "vertices": [
+    {"_id": "n0", "_type": "vertex", "label": "br", "kind": "element"}
+  ],
+  "edges": [
+  ]
+}

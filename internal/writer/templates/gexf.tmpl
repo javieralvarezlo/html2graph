@@ -1,0 +1,30 @@
+{{- /*
+GEXF 1.3 (el formato propio de Gephi): XML con una declaración de
+codificación UTF-8 y el espacio de nombres de GEXF 1.3. El grafo es
+estático y dirigido (defaultedgetype="directed"). La clase del nodo se
+declara como atributo de nodo kind y cada nodo nN la lleva en un attvalue;
+la etiqueta de presentación va en el atributo label del propio nodo. Cada
+arista eI (I es su posición en la lista) va del padre (source) al hijo
+(target). Los textos se escapan con xml.
+*/ -}}
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://gexf.net/1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta>
+    <creator>html2graph</creator>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node">
+      <attribute id="kind" title="kind" type="string"/>
+    </attributes>
+    <nodes>
+{{- range .Nodes}}
+      <node id="n{{.ID}}" label="{{xml .Label}}"><attvalues><attvalue for="kind" value="{{.Kind}}"/></attvalues></node>
+{{- end}}
+    </nodes>
+    <edges>
+{{- range $i, $e := .Edges}}
+      <edge id="e{{$i}}" source="n{{$e.From}}" target="n{{$e.To}}"/>
+{{- end}}
+    </edges>
+  </graph>
+</gexf>

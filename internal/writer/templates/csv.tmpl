@@ -1,0 +1,16 @@
+{{- /*
+CSV Graph (lista de adyacencia de Gephi): una línea por nodo con el nodo y,
+detrás, sus hijos, separados por punto y coma. El formato no tiene
+identificadores aparte de las etiquetas: Gephi usa el texto de cada campo
+como identificador y como etiqueta del nodo, y uniría en uno solo todos los
+nodos con la misma etiqueta (los dos p del enunciado, por ejemplo). Para
+que cada nodo sea distinto, se escribe su etiqueta de presentación seguida
+de su ID entre paréntesis, «p (7)». Cada campo va entre comillas dobles y
+escapado con csv. Los hijos salen de la lista de adyacencia del grafo; su
+ID es también su posición en la lista de nodos.
+*/ -}}
+{{- $hijos := .Adjacency}}
+{{- range .Nodes}}
+{{- template "nodo" .}}{{range index $hijos .ID}};{{template "nodo" index $.Nodes .}}{{end}}
+{{end}}
+{{- define "nodo"}}"{{csv (printf "%s (%d)" .Label .ID)}}"{{end -}}

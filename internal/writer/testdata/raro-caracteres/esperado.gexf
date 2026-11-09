@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://gexf.net/1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta>
+    <creator>html2graph</creator>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node">
+      <attribute id="kind" title="kind" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="n0" label="div title=&apos;di &quot;hola&quot;&apos; data-vacio=&quot;&quot; data-apos=&quot;it&apos;s&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n1" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n2" label="comillas &quot;dobles&quot; y &apos;simples&apos;, coma, punto y coma; fin"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n3" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n4" label="&amp; &lt;b&gt; &quot;x&quot; &apos;y&apos; &amp;quot; &amp;#233;"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n5" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n6" label="barra \ invertida, \n no es un salto, termina en barra \"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n7" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n8" label="&apos;a&apos;, &apos;b&apos;"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n9" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n10" label="a b y c  d"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n11" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n12" label="emoji 😀 y letras ñ ü 日本語 Ελληνικά العربية"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n13" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n14" label="edgedef&gt; en un texto"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n15" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n16" label="null"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n17" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n18" label="[corchetes] y #almohadilla"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+    </nodes>
+    <edges>
+      <edge id="e0" source="n0" target="n1"/>
+      <edge id="e1" source="n1" target="n2"/>
+      <edge id="e2" source="n0" target="n3"/>
+      <edge id="e3" source="n3" target="n4"/>
+      <edge id="e4" source="n0" target="n5"/>
+      <edge id="e5" source="n5" target="n6"/>
+      <edge id="e6" source="n0" target="n7"/>
+      <edge id="e7" source="n7" target="n8"/>
+      <edge id="e8" source="n0" target="n9"/>
+      <edge id="e9" source="n9" target="n10"/>
+      <edge id="e10" source="n0" target="n11"/>
+      <edge id="e11" source="n11" target="n12"/>
+      <edge id="e12" source="n0" target="n13"/>
+      <edge id="e13" source="n13" target="n14"/>
+      <edge id="e14" source="n0" target="n15"/>
+      <edge id="e15" source="n15" target="n16"/>
+      <edge id="e16" source="n0" target="n17"/>
+      <edge id="e17" source="n17" target="n18"/>
+    </edges>
+  </graph>
+</gexf>

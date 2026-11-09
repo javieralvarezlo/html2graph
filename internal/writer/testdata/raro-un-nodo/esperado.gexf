@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://gexf.net/1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta>
+    <creator>html2graph</creator>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node">
+      <attribute id="kind" title="kind" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="n0" label="br"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+    </nodes>
+    <edges>
+    </edges>
+  </graph>
+</gexf>

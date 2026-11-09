@@ -1,0 +1,10 @@
+{
+  "mode": "NORMAL",
+  "vertices": [
+    {"_id": "n0", "_type": "vertex", "label": "p title=\"línea 1\nlínea 2\tcon tabulador\" data-ref=\"a\r\nb\tc\"", "kind": "element"},
+    {"_id": "n1", "_type": "vertex", "label": "texto con salto y tabulador", "kind": "text"}
+  ],
+  "edges": [
+    {"_id": "e0", "_type": "edge", "_outV": "n0", "_inV": "n1", "_label": "child"}
+  ]
+}

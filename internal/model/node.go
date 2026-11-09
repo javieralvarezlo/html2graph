@@ -12,7 +12,9 @@
 //   - node.go: el nodo del árbol (Node, NodeKind, Attr). No hay un tipo
 //     árbol aparte: un árbol se representa por su nodo raíz, y el resto
 //     se alcanza recorriendo recursivamente la lista de hijos.
-//   - graph.go: el grafo aplanado (Graph, GraphNode, GraphEdge).
+//   - graph.go: el grafo aplanado (Graph, GraphNode, GraphEdge), la
+//     operación Flatten que lo construye a partir del árbol y la etiqueta
+//     de presentación de cada nodo (DisplayLabel).
 //   - debug.go: Dump, que escribe un árbol como texto con sangría para
 //     los tests y la depuración.
 package model

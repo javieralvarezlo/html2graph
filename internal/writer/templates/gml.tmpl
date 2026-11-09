@@ -1,0 +1,18 @@
+{{- /*
+GML (Graph Modelling Language, de Himsolt): una lista de pares clave valor
+entre corchetes. El grafo es dirigido (directed 1) y tiene un bloque node
+por nodo, con su ID numérico, la etiqueta de presentación (label) y la
+clase (kind), y un bloque edge por arista, del padre (source) al hijo
+(target). Cada bloque ocupa una línea; GML no da valor a los saltos de
+línea. Las cadenas van entre comillas dobles y escapadas con gml, que deja
+el fichero en ASCII de 7 bits, como pide el formato.
+*/ -}}
+graph [
+  directed 1
+{{- range .Nodes}}
+  node [ id {{.ID}} label "{{gml .Label}}" kind "{{.Kind}}" ]
+{{- end}}
+{{- range .Edges}}
+  edge [ source {{.From}} target {{.To}} ]
+{{- end}}
+]

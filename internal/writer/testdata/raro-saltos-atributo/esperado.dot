@@ -1,0 +1,6 @@
+digraph html2graph {
+	node [shape=box];
+	n0 [label="p title=\"línea 1\nlínea 2	con tabulador\" data-ref=\"a\nb	c\""];
+	n1 [label="texto con salto y tabulador"];
+	n0 -> n1;
+}

@@ -1,0 +1,26 @@
+digraph html2graph {
+	node [shape=box];
+	n0 [label="ul"];
+	n1 [label="li"];
+	n2 [label="x"];
+	n3 [label="li"];
+	n4 [label="x"];
+	n5 [label="li"];
+	n6 [label="x"];
+	n7 [label="li"];
+	n8 [label="p"];
+	n9 [label="p"];
+	n10 [label="p"];
+	n11 [label="li"];
+	n0 -> n1;
+	n1 -> n2;
+	n0 -> n3;
+	n3 -> n4;
+	n0 -> n5;
+	n5 -> n6;
+	n0 -> n7;
+	n7 -> n8;
+	n8 -> n9;
+	n7 -> n10;
+	n10 -> n11;
+}

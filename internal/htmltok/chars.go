@@ -3,7 +3,6 @@ package htmltok
 import (
 	"strings"
 	"unicode"
-	"unicode/utf8"
 
 	"github.com/javieralvarezlo/html2graph/internal/token"
 )
@@ -89,7 +88,9 @@ func decodeEntity(name string) (decoded string, ok bool) {
 		}
 	}
 
-	if !allowedChar(rune(code)) {
+	// El carácter tiene que poder aparecer en un documento: las mismas
+	// reglas que aplica el lector a los caracteres escritos tal cual.
+	if !token.IsAllowed(rune(code)) {
 		return "", false
 	}
 
@@ -109,25 +110,4 @@ func digitValue(c rune) int {
 	}
 
 	return -1
-}
-
-// allowedChar indica si una entidad numérica puede producir el carácter c.
-// Se rechazan los códigos que no son caracteres Unicode, los caracteres de
-// control (salvo tabulador, salto de línea y retorno de carro) y los
-// no-caracteres (U+FDD0 a U+FDEF y los que acaban en FFFE o FFFF), porque
-// no pueden aparecer en un fichero XML y romperían las salidas GraphML y
-// GEXF.
-func allowedChar(c rune) bool {
-	switch {
-	case c <= 0 || !utf8.ValidRune(c):
-		return false
-	case unicode.IsControl(c):
-		return c == '\t' || c == '\n' || c == '\r'
-	case c >= 0xFDD0 && c <= 0xFDEF:
-		return false
-	case c&0xFFFE == 0xFFFE:
-		return false
-	}
-
-	return true
 }

@@ -1,0 +1,11 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'pre title="línea 1\nlínea 2"',element
+n1,'uno\ndos',text
+n2,'tres\r\ncuatro',text
+n3,'cinco\rseis',text
+n4,'siete	ocho',text
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+n0,n1,true
+n0,n2,true
+n0,n3,true
+n0,n4,true

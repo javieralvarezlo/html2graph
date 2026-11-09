@@ -1,0 +1,21 @@
+{{- /*
+GraphML: XML con una declaración de codificación UTF-8 y el espacio de
+nombres de GraphML 1.0. Los datos de los nodos se declaran con un elemento
+key cada uno: label (la etiqueta de presentación) y kind (la clase del
+nodo). El grafo es dirigido por defecto (edgedefault="directed"); cada
+nodo nN lleva sus dos datos y cada arista va del padre (source) al hijo
+(target). Los textos se escapan con xml.
+*/ -}}
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="kind" for="node" attr.name="kind" attr.type="string"/>
+  <graph id="html2graph" edgedefault="directed">
+{{- range .Nodes}}
+    <node id="n{{.ID}}"><data key="label">{{xml .Label}}</data><data key="kind">{{.Kind}}</data></node>
+{{- end}}
+{{- range .Edges}}
+    <edge source="n{{.From}}" target="n{{.To}}"/>
+{{- end}}
+  </graph>
+</graphml>

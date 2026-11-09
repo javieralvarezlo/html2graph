@@ -1,0 +1,30 @@
+{
+  "mode": "NORMAL",
+  "vertices": [
+    {"_id": "n0", "_type": "vertex", "label": "ul", "kind": "element"},
+    {"_id": "n1", "_type": "vertex", "label": "li", "kind": "element"},
+    {"_id": "n2", "_type": "vertex", "label": "x", "kind": "text"},
+    {"_id": "n3", "_type": "vertex", "label": "li", "kind": "element"},
+    {"_id": "n4", "_type": "vertex", "label": "x", "kind": "text"},
+    {"_id": "n5", "_type": "vertex", "label": "li", "kind": "element"},
+    {"_id": "n6", "_type": "vertex", "label": "x", "kind": "text"},
+    {"_id": "n7", "_type": "vertex", "label": "li", "kind": "element"},
+    {"_id": "n8", "_type": "vertex", "label": "p", "kind": "element"},
+    {"_id": "n9", "_type": "vertex", "label": "p", "kind": "text"},
+    {"_id": "n10", "_type": "vertex", "label": "p", "kind": "element"},
+    {"_id": "n11", "_type": "vertex", "label": "li", "kind": "text"}
+  ],
+  "edges": [
+    {"_id": "e0", "_type": "edge", "_outV": "n0", "_inV": "n1", "_label": "child"},
+    {"_id": "e1", "_type": "edge", "_outV": "n1", "_inV": "n2", "_label": "child"},
+    {"_id": "e2", "_type": "edge", "_outV": "n0", "_inV": "n3", "_label": "child"},
+    {"_id": "e3", "_type": "edge", "_outV": "n3", "_inV": "n4", "_label": "child"},
+    {"_id": "e4", "_type": "edge", "_outV": "n0", "_inV": "n5", "_label": "child"},
+    {"_id": "e5", "_type": "edge", "_outV": "n5", "_inV": "n6", "_label": "child"},
+    {"_id": "e6", "_type": "edge", "_outV": "n0", "_inV": "n7", "_label": "child"},
+    {"_id": "e7", "_type": "edge", "_outV": "n7", "_inV": "n8", "_label": "child"},
+    {"_id": "e8", "_type": "edge", "_outV": "n8", "_inV": "n9", "_label": "child"},
+    {"_id": "e9", "_type": "edge", "_outV": "n7", "_inV": "n10", "_label": "child"},
+    {"_id": "e10", "_type": "edge", "_outV": "n10", "_inV": "n11", "_label": "child"}
+  ]
+}

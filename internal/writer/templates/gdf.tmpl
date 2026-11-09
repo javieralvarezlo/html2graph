@@ -1,0 +1,19 @@
+{{- /*
+GDF (formato de GUESS, que también lee Gephi): texto con una línea por nodo
+y una por arista, en dos secciones encabezadas por nodedef> y edgedef>. La
+cabecera de cada sección nombra las columnas y su tipo, como en SQL. Cada
+nodo tiene su nombre nN (el ID del grafo), la etiqueta de presentación
+entre comillas simples y escapada con gdf, y su clase (element, text...)
+como columna kind, sin comillas porque es una palabra fija. Cada arista va
+del padre al hijo y lleva directed=true, porque GDF no tiene un valor por
+defecto para todo el grafo y Gephi las trata como no dirigidas si no se
+indica.
+*/ -}}
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+{{- range .Nodes}}
+n{{.ID}},'{{gdf .Label}}',{{.Kind}}
+{{- end}}
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+{{- range .Edges}}
+n{{.From}},n{{.To}},true
+{{- end}}

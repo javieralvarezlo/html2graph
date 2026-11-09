@@ -1,0 +1,42 @@
+{
+  "mode": "NORMAL",
+  "vertices": [
+    {"_id": "n0", "_type": "vertex", "label": "html", "kind": "element"},
+    {"_id": "n1", "_type": "vertex", "label": "head", "kind": "element"},
+    {"_id": "n2", "_type": "vertex", "label": "title", "kind": "element"},
+    {"_id": "n3", "_type": "vertex", "label": "Hoja de enlaces", "kind": "text"},
+    {"_id": "n4", "_type": "vertex", "label": "body", "kind": "element"},
+    {"_id": "n5", "_type": "vertex", "label": "h1", "kind": "element"},
+    {"_id": "n6", "_type": "vertex", "label": "Ejemplo2", "kind": "text"},
+    {"_id": "n7", "_type": "vertex", "label": "p", "kind": "element"},
+    {"_id": "n8", "_type": "vertex", "label": "Este texto tiene un", "kind": "text"},
+    {"_id": "n9", "_type": "vertex", "label": "a href=\"http://www.issi.uned.es\"", "kind": "element"},
+    {"_id": "n10", "_type": "vertex", "label": "enlace", "kind": "text"},
+    {"_id": "n11", "_type": "vertex", "label": "y un texto con", "kind": "text"},
+    {"_id": "n12", "_type": "vertex", "label": "em", "kind": "element"},
+    {"_id": "n13", "_type": "vertex", "label": "énfasis", "kind": "text"},
+    {"_id": "n14", "_type": "vertex", "label": "p", "kind": "element"},
+    {"_id": "n15", "_type": "vertex", "label": "Este texto NO tiene otro enlace y un texto con", "kind": "text"},
+    {"_id": "n16", "_type": "vertex", "label": "b", "kind": "element"},
+    {"_id": "n17", "_type": "vertex", "label": "negrita", "kind": "text"}
+  ],
+  "edges": [
+    {"_id": "e0", "_type": "edge", "_outV": "n0", "_inV": "n1", "_label": "child"},
+    {"_id": "e1", "_type": "edge", "_outV": "n1", "_inV": "n2", "_label": "child"},
+    {"_id": "e2", "_type": "edge", "_outV": "n2", "_inV": "n3", "_label": "child"},
+    {"_id": "e3", "_type": "edge", "_outV": "n0", "_inV": "n4", "_label": "child"},
+    {"_id": "e4", "_type": "edge", "_outV": "n4", "_inV": "n5", "_label": "child"},
+    {"_id": "e5", "_type": "edge", "_outV": "n5", "_inV": "n6", "_label": "child"},
+    {"_id": "e6", "_type": "edge", "_outV": "n4", "_inV": "n7", "_label": "child"},
+    {"_id": "e7", "_type": "edge", "_outV": "n7", "_inV": "n8", "_label": "child"},
+    {"_id": "e8", "_type": "edge", "_outV": "n7", "_inV": "n9", "_label": "child"},
+    {"_id": "e9", "_type": "edge", "_outV": "n9", "_inV": "n10", "_label": "child"},
+    {"_id": "e10", "_type": "edge", "_outV": "n7", "_inV": "n11", "_label": "child"},
+    {"_id": "e11", "_type": "edge", "_outV": "n7", "_inV": "n12", "_label": "child"},
+    {"_id": "e12", "_type": "edge", "_outV": "n12", "_inV": "n13", "_label": "child"},
+    {"_id": "e13", "_type": "edge", "_outV": "n4", "_inV": "n14", "_label": "child"},
+    {"_id": "e14", "_type": "edge", "_outV": "n14", "_inV": "n15", "_label": "child"},
+    {"_id": "e15", "_type": "edge", "_outV": "n14", "_inV": "n16", "_label": "child"},
+    {"_id": "e16", "_type": "edge", "_outV": "n16", "_inV": "n17", "_label": "child"}
+  ]
+}

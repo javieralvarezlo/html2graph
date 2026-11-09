@@ -1,0 +1,3 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'br',element
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN

@@ -1,0 +1,16 @@
+{
+  "mode": "NORMAL",
+  "vertices": [
+    {"_id": "n0", "_type": "vertex", "label": "pre title=\"línea 1\nlínea 2\"", "kind": "element"},
+    {"_id": "n1", "_type": "vertex", "label": "uno\ndos", "kind": "text"},
+    {"_id": "n2", "_type": "vertex", "label": "tres\r\ncuatro", "kind": "text"},
+    {"_id": "n3", "_type": "vertex", "label": "cinco\rseis", "kind": "text"},
+    {"_id": "n4", "_type": "vertex", "label": "siete\tocho", "kind": "text"}
+  ],
+  "edges": [
+    {"_id": "e0", "_type": "edge", "_outV": "n0", "_inV": "n1", "_label": "child"},
+    {"_id": "e1", "_type": "edge", "_outV": "n0", "_inV": "n2", "_label": "child"},
+    {"_id": "e2", "_type": "edge", "_outV": "n0", "_inV": "n3", "_label": "child"},
+    {"_id": "e3", "_type": "edge", "_outV": "n0", "_inV": "n4", "_label": "child"}
+  ]
+}

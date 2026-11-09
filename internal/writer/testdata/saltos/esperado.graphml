@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="kind" for="node" attr.name="kind" attr.type="string"/>
+  <graph id="html2graph" edgedefault="directed">
+    <node id="n0"><data key="label">pre title=&quot;línea 1&#10;línea 2&quot;</data><data key="kind">element</data></node>
+    <node id="n1"><data key="label">uno&#10;dos</data><data key="kind">text</data></node>
+    <node id="n2"><data key="label">tres&#13;&#10;cuatro</data><data key="kind">text</data></node>
+    <node id="n3"><data key="label">cinco&#13;seis</data><data key="kind">text</data></node>
+    <node id="n4"><data key="label">siete&#9;ocho</data><data key="kind">text</data></node>
+    <edge source="n0" target="n1"/>
+    <edge source="n0" target="n2"/>
+    <edge source="n0" target="n3"/>
+    <edge source="n0" target="n4"/>
+  </graph>
+</graphml>
