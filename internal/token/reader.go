@@ -83,12 +83,8 @@ func disallowedChar(src string) error {
 	line, col := 1, 1
 	for _, c := range src {
 		if !IsAllowed(c) {
-			kind := "carácter de control"
-			if !unicode.IsControl(c) {
-				kind = "no-carácter Unicode"
-			}
 			return Errorf(line, col,
-				"%s U+%04X no admitido: no puede representarse en las salidas XML; elimínelo del fichero", kind, c)
+				"%s no admitido: no puede representarse en las salidas XML; elimínelo del fichero", DescribeDisallowed(c))
 		}
 
 		if c == '\n' {
@@ -193,9 +189,11 @@ func (r *Reader) Pos() (line, col int) {
 }
 
 // IsSpace indica si c es un espacio en blanco: espacio, tabulador, salto de
-// línea, retorno de carro o salto de página. Es la única definición de
-// espacio del proyecto: la usan el tokenizer HTML para separar atributos y
-// el parser para limpiar los textos.
+// línea, retorno de carro o salto de página. Es la definición de espacio
+// de HTML: la usan el tokenizer HTML para separar atributos y el parser
+// para limpiar los textos. El tokenizer JSON usa la de JSON (RFC 8259), que
+// no incluye el salto de página; en la práctica coinciden, porque el lector
+// rechaza el salto de página.
 //
 // El salto de página (U+000C) se incluye por coherencia con la definición de
 // espacio de HTML, pero nunca llega a usarse: XML 1.0 no lo admite, así que

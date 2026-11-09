@@ -22,6 +22,8 @@
 //     usado por tokenizers y parsers para informar de cualquier fallo.
 //   - Reader: lector de caracteres con posición, común a los tokenizers.
 //   - IsSpace: definición de espacio en blanco común a tokenizers y parsers.
+//   - Describe y DescribeDisallowed: cómo se nombra un carácter en los
+//     mensajes de error.
 //
 // # Convenciones de posición
 //

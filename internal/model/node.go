@@ -19,7 +19,10 @@
 //     los tests y la depuración.
 package model
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // NodeKind indica qué clase de cosa representa un nodo del árbol.
 //
@@ -40,12 +43,14 @@ import "fmt"
 //	JSONObject  un objeto JSON                         {}
 //	JSONArray   un array JSON                          []
 //	JSONKey     una clave de un objeto JSON            nombre de la clave
-//	JSONValue   un valor JSON simple (cadena, número,  el valor
-//	            true, false o null)
+//	JSONValue   un valor JSON simple (cadena, número,  el literal; una
+//	            true, false o null)                    cadena, entre comillas
 //
 // Los nodos Attribute solo aparecen si las reglas piden los atributos como
 // hijos, por defecto los atributos se guardan en el campo Attrs del nodo
-// Element. Un nodo JSONKey tiene siempre un único hijo: su valor.
+// Element. Un nodo JSONKey tiene siempre un único hijo: su valor. La
+// etiqueta de una cadena JSON lleva comillas dobles ("30") para que no se
+// confunda con un número (30) ni con true, false o null.
 //
 // Ejemplo HTML. La entrada
 //
@@ -62,12 +67,12 @@ import "fmt"
 //
 // produce:
 //
-//	{}           (JSONObject)
-//	├── nombre   (JSONKey)
-//	│   └── Ana  (JSONValue)
-//	└── tags     (JSONKey)
-//	    └── []   (JSONArray)
-//	        └── x    (JSONValue)
+//	{}             (JSONObject)
+//	├── nombre     (JSONKey)
+//	│   └── "Ana"  (JSONValue)
+//	└── tags       (JSONKey)
+//	    └── []     (JSONArray)
+//	        └── "x"    (JSONValue)
 type NodeKind int
 
 const (
@@ -108,6 +113,38 @@ func (k NodeKind) String() string {
 type Attr struct {
 	Name  string
 	Value string
+}
+
+// String devuelve el atributo escrito como en HTML, nombre="valor". Es el
+// texto con que aparece en la etiqueta de presentación de su elemento
+// (DisplayLabel) y la etiqueta del nodo Attribute en que lo convierte la
+// transformación cuando las reglas piden los atributos como hijos.
+//
+// Las comillas se eligen como lo haría quien escribe HTML, para que el texto
+// no sea ambiguo: dobles si el valor no contiene comillas dobles
+// (title="it's"); simples si contiene dobles pero no simples
+// (title='di "hola"'); y si contiene las dos, dobles, con las dobles del
+// valor escritas &quot; (title="di &quot;hola&quot; y 'adiós'"). No se
+// escapa nada más: cada formato de salida escapa según sus propias reglas.
+func (a Attr) String() string {
+	quote, value := `"`, a.Value
+	switch {
+	case !strings.Contains(value, `"`):
+		// Comillas dobles y el valor tal cual, el caso habitual.
+	case !strings.Contains(value, "'"):
+		quote = "'"
+	default:
+		value = strings.ReplaceAll(value, `"`, "&quot;")
+	}
+
+	var b strings.Builder
+	b.WriteString(a.Name)
+	b.WriteString("=")
+	b.WriteString(quote)
+	b.WriteString(value)
+	b.WriteString(quote)
+
+	return b.String()
 }
 
 // Node es un nodo del árbol.

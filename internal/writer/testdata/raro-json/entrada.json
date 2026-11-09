@@ -1,0 +1,16 @@
+{
+  "saltos": "línea 1\nlínea 2\r\nlínea 3",
+  "tabulador": "a\tb",
+  "comillas": "di \"hola\" y 'adiós'",
+  "barra final": "termina en \\",
+  "texto null": "null",
+  "valor null": null,
+  "cadena 30": "30",
+  "número 30": 30,
+  "cadena vacía": "",
+  "espacios": "  en los bordes  ",
+  "largo": 123456789012345678901234567890.123456789e-200,
+  "emojis": "😀 🇪🇸",
+  "edgedef>": "x,edgedef>y",
+  "anidados": [[[]], [{}]]
+}

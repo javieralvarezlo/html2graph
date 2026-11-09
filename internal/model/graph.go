@@ -97,13 +97,9 @@ func (g Graph) Adjacency() [][]int {
 // (a href="http://www.issi.uned.es"); para el resto de clases es Label tal
 // cual, y en particular los textos van sin comillas.
 //
-// Las comillas de cada valor se eligen como lo haría quien escribe HTML,
-// para que la etiqueta no sea ambigua: dobles si el valor no contiene
-// comillas dobles (title="it's"); simples si contiene dobles pero no
-// simples (title='di "hola"'); y si contiene las dos, dobles, con las
-// dobles del valor escritas &quot; (title="di &quot;hola&quot; y 'adiós'").
-// No se escapa nada más: cada formato escapa la etiqueta según sus propias
-// reglas.
+// Cada atributo se escribe con Attr.String, que elige las comillas del
+// valor para que la etiqueta no sea ambigua (title='di "hola"'). No se
+// escapa nada más: cada formato escapa la etiqueta según sus propias reglas.
 func (n *Node) DisplayLabel() string {
 	if n.Kind != Element || len(n.Attrs) == 0 {
 		return n.Label
@@ -112,22 +108,8 @@ func (n *Node) DisplayLabel() string {
 	var b strings.Builder
 	b.WriteString(n.Label)
 	for _, a := range n.Attrs {
-		quote, value := `"`, a.Value
-		switch {
-		case !strings.Contains(value, `"`):
-			// Comillas dobles y el valor tal cual, el caso habitual.
-		case !strings.Contains(value, "'"):
-			quote = "'"
-		default:
-			value = strings.ReplaceAll(value, `"`, "&quot;")
-		}
-
 		b.WriteString(" ")
-		b.WriteString(a.Name)
-		b.WriteString("=")
-		b.WriteString(quote)
-		b.WriteString(value)
-		b.WriteString(quote)
+		b.WriteString(a.String())
 	}
 
 	return b.String()

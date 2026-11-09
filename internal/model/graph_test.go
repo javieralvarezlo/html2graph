@@ -42,16 +42,16 @@ func TestFlatten(t *testing.T) {
 		{
 			"árbol JSON construido a mano",
 			node(JSONObject, "{}",
-				node(JSONKey, "nombre", node(JSONValue, "Ana")),
-				node(JSONKey, "tags", node(JSONArray, "[]", node(JSONValue, "x")))),
+				node(JSONKey, "nombre", node(JSONValue, `"Ana"`)),
+				node(JSONKey, "tags", node(JSONArray, "[]", node(JSONValue, `"x"`)))),
 			Graph{
 				Nodes: []GraphNode{
 					{ID: 0, Label: "{}", Kind: JSONObject},
 					{ID: 1, Label: "nombre", Kind: JSONKey},
-					{ID: 2, Label: "Ana", Kind: JSONValue},
+					{ID: 2, Label: `"Ana"`, Kind: JSONValue},
 					{ID: 3, Label: "tags", Kind: JSONKey},
 					{ID: 4, Label: "[]", Kind: JSONArray},
-					{ID: 5, Label: "x", Kind: JSONValue},
+					{ID: 5, Label: `"x"`, Kind: JSONValue},
 				},
 				Edges: []GraphEdge{{0, 1}, {1, 2}, {0, 3}, {3, 4}, {4, 5}},
 			},

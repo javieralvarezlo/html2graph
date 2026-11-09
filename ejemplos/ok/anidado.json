@@ -1,0 +1,18 @@
+{
+  "biblioteca": "Librería «El Ñandú»",
+  "abierta": true,
+  "socios": 1.2e3,
+  "saldo": -2.5E-3,
+  "coordenadas": [40.41678, -3.70379],
+  "web": null,
+  "nota": "null",
+  "lema": "Leer es \"viajar\"\tsin moverse",
+  "ruta": "C:\\fondos\\catálogo.csv",
+  "horario": {"lunes": "9:00\u201320:00", "sábado": "10:00 \/ 14:00"},
+  "secciones": {},
+  "etiquetas": [],
+  "libros": [
+    {"título": "Niebla", "autor": "Miguel de Unamuno", "año": 1914, "prestado": false},
+    {"título": "Cien años de soledad", "año": 1967, "prestado": true, "reseñas": [5, 4.5, "\ud83d\udc4d"]}
+  ]
+}

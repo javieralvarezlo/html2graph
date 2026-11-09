@@ -1,9 +1,7 @@
 package htmltok
 
 import (
-	"fmt"
 	"strings"
-	"unicode"
 
 	"github.com/javieralvarezlo/html2graph/internal/token"
 )
@@ -84,35 +82,5 @@ func errAt(r *token.Reader, format string, args ...any) error {
 // errInvalid devuelve el error de carácter c inválido en la posición actual;
 // where explica dónde apareció.
 func errInvalid(r *token.Reader, c rune, where string) error {
-	return errAt(r, "carácter %s inválido %s", describe(c), where)
-}
-
-// describe devuelve c tal como se mostrará en un mensaje de error:
-//   - los espacios en blanco, por su nombre ("salto de línea");
-//   - la comilla simple, entre comillas dobles, para que se lea bien;
-//   - el resto de ASCII visible, entre comillas simples ('$');
-//   - cualquier otro carácter, con su código Unicode, para que no se
-//     confunda con otro parecido o invisible: un espacio de no separación
-//     parece un espacio y un acento combinante no se ve solo.
-func describe(c rune) string {
-	names := map[rune]string{
-		' ':  "' ' (espacio)",
-		'\t': "tabulador",
-		'\n': "salto de línea",
-		'\r': "retorno de carro",
-		'\f': "salto de página",
-		'\'': `"'" (comilla simple)`,
-	}
-
-	name, ok := names[c]
-	switch {
-	case ok:
-		return name
-	case c > ' ' && c < 0x7F:
-		return "'" + string(c) + "'"
-	case unicode.IsGraphic(c) && !unicode.Is(unicode.Mn, c) && !unicode.IsSpace(c):
-		return fmt.Sprintf("'%c' (%U)", c, c)
-	}
-
-	return fmt.Sprintf("%U", c)
+	return errAt(r, "carácter %s inválido %s", token.Describe(c), where)
 }

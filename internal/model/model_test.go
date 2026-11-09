@@ -69,3 +69,22 @@ func TestAppendChild(t *testing.T) {
 		t.Errorf("atributo de a = %+v", got)
 	}
 }
+
+func TestAttrString(t *testing.T) {
+	tests := []struct {
+		a    Attr
+		want string
+	}{
+		{Attr{"href", "http://www.issi.uned.es"}, `href="http://www.issi.uned.es"`},
+		{Attr{"alt", ""}, `alt=""`},
+		{Attr{"title", `it's`}, `title="it's"`},
+		{Attr{"title", `di "hola"`}, `title='di "hola"'`},
+		{Attr{"title", `di "hola" y 'adiós'`}, `title="di &quot;hola&quot; y 'adiós'"`},
+		{Attr{"title", "uno\ndos &amp;"}, "title=\"uno\ndos &amp;\""},
+	}
+	for _, tt := range tests {
+		if got := tt.a.String(); got != tt.want {
+			t.Errorf("Attr{%q, %q}.String() = %q, se esperaba %q", tt.a.Name, tt.a.Value, got, tt.want)
+		}
+	}
+}

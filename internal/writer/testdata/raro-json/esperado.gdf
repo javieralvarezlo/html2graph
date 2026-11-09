@@ -1,0 +1,67 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'{}',object
+n1,'saltos',key
+n2,'"línea 1\nlínea 2\r\nlínea 3"',value
+n3,'tabulador',key
+n4,'"a	b"',value
+n5,'comillas',key
+n6,'"di "hola" y \'adiós\'"',value
+n7,'barra final',key
+n8,'"termina en \\"',value
+n9,'texto null',key
+n10,'"null"',value
+n11,'valor null',key
+n12,'null',value
+n13,'cadena 30',key
+n14,'"30"',value
+n15,'número 30',key
+n16,'30',value
+n17,'cadena vacía',key
+n18,'""',value
+n19,'espacios',key
+n20,'"  en los bordes  "',value
+n21,'largo',key
+n22,'123456789012345678901234567890.123456789e-200',value
+n23,'emojis',key
+n24,'"😀 🇪🇸"',value
+n25,'edgedef\>',key
+n26,'"x,edgedef\>y"',value
+n27,'anidados',key
+n28,'[]',array
+n29,'[]',array
+n30,'[]',array
+n31,'[]',array
+n32,'{}',object
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+n0,n1,true
+n1,n2,true
+n0,n3,true
+n3,n4,true
+n0,n5,true
+n5,n6,true
+n0,n7,true
+n7,n8,true
+n0,n9,true
+n9,n10,true
+n0,n11,true
+n11,n12,true
+n0,n13,true
+n13,n14,true
+n0,n15,true
+n15,n16,true
+n0,n17,true
+n17,n18,true
+n0,n19,true
+n19,n20,true
+n0,n21,true
+n21,n22,true
+n0,n23,true
+n23,n24,true
+n0,n25,true
+n25,n26,true
+n0,n27,true
+n27,n28,true
+n28,n29,true
+n29,n30,true
+n28,n31,true
+n31,n32,true

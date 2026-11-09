@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/javieralvarezlo/html2graph/internal/htmltok"
+	"github.com/javieralvarezlo/html2graph/internal/jsontok"
 	"github.com/javieralvarezlo/html2graph/internal/model"
 	"github.com/javieralvarezlo/html2graph/internal/parser"
 )
@@ -226,9 +227,9 @@ func TestDOTLargo(t *testing.T) {
 	}
 }
 
-// outputCases son los casos de TestSalidas: los dos ejemplos públicos, los
-// casos con salidas peculiares de testdata/<caso>/entrada.html y un árbol
-// construido a mano
+// outputCases son los casos de TestSalidas: los ejemplos públicos, los
+// casos con salidas peculiares de testdata/<caso>/entrada.html (o .json) y
+// un árbol construido a mano
 // con saltos de línea, retornos de carro y tabuladores también en los
 // textos, donde el parser HTML los colapsa (en los valores de atributo sí
 // llegan desde HTML: caso raro-saltos-atributo).
@@ -245,6 +246,8 @@ func outputCases(t *testing.T) []struct {
 		{"raro-largo", "testdata/raro-largo/entrada.html"},
 		{"raro-saltos-atributo", "testdata/raro-saltos-atributo/entrada.html"},
 		{"raro-un-nodo", "testdata/raro-un-nodo/entrada.html"},
+		{"anidado", "../../ejemplos/ok/anidado.json"},
+		{"raro-json", "testdata/raro-json/entrada.json"},
 	}
 	var cases []struct {
 		name string
@@ -255,7 +258,13 @@ func outputCases(t *testing.T) []struct {
 		if err != nil {
 			t.Fatal(err)
 		}
-		root, err := parser.ParseHTML(htmltok.New(string(src)))
+		// El parser se elige por la extensión, como en la línea de órdenes.
+		var root *model.Node
+		if filepath.Ext(f.path) == ".json" {
+			root, err = parser.ParseJSON(jsontok.New(string(src)))
+		} else {
+			root, err = parser.ParseHTML(htmltok.New(string(src)))
+		}
 		if err != nil {
 			t.Fatalf("%s: error inesperado: %v", f.path, err)
 		}

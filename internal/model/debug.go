@@ -10,7 +10,7 @@ import "strings"
 //
 //	Element     nombre y, si tiene, sus atributos:  a href="http://x"
 //	Text        el texto entre comillas dobles:      "Hoja de enlaces"
-//	el resto    su etiqueta tal cual:                {}  []  nombre  Ana
+//	el resto    su etiqueta tal cual:                {}  []  nombre  "Ana"
 //
 // Dentro de las comillas (textos y valores de atributo) se escriben \", \\
 // y \n en lugar de la comilla, la barra invertida y el salto de línea, y
