@@ -1,4 +1,9 @@
+# Todos los ficheros de texto se guardan y se sacan con saltos de línea \n,
+# también en Windows: gofmt da por mal formateado un .go con \r\n, y una
+# plantilla (.tmpl) con \r\n cambiaría los saltos de línea de las salidas.
+* text=auto eol=lf
+
 # Los ejemplos y las salidas esperadas se comparan byte a byte: Git no debe
-# convertir sus saltos de línea a \r\n al sacarlos en Windows.
+# tocar sus saltos de línea.
 ejemplos/** -text
 internal/writer/testdata/** -text

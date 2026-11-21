@@ -268,7 +268,7 @@ func TestRunFicheroSalida(t *testing.T) {
 	if code := run([]string{"-o", filepath.Join(dir, "no", "existe.dot"), enunciado}, &vacio, &stderr); code != 1 {
 		t.Errorf("código de salida %d al no poder escribir, se esperaba 1", code)
 	}
-	if !strings.HasPrefix(stderr.String(), "munger: no se puede escribir la salida: ") {
+	if want := "munger: no se puede escribir «" + filepath.Join(dir, "no", "existe.dot") + "»: "; !strings.HasPrefix(stderr.String(), want) {
 		t.Errorf("stderr = %q", stderr.String())
 	}
 }
@@ -326,7 +326,7 @@ func TestRunAll(t *testing.T) {
 		},
 		{
 			name: "una salida no se puede escribir", input: enunciado, outDir: ocupado, code: 1,
-			stderr: "munger: no se puede escribir la salida: ",
+			stderr: "munger: no se puede escribir «" + filepath.Join(ocupado, "enunciado.gml") + "»: ",
 		},
 	}
 	for _, tt := range tests {

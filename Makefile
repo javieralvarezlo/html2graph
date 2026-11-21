@@ -9,9 +9,9 @@
 #   make ejemplos  regenera las salidas de ejemplos/ok y comprueba los
 #                  mensajes de ejemplos/error
 #   make validar   valida las salidas esperadas con herramientas externas
-#                  (Python con networkx, Graphviz, lxml o xmllint; véase tools/LEEME.md)
+#                  (Python con networkx, Graphviz, lxml o xmllint; véase tools/README.md)
 #   make matriz    prueba todas las combinaciones de la CLI (necesita bash)
-#   make dist      binarios para Windows, Linux y macOS  (fase 8)
+#   make dist      binarios para Windows, Linux y macOS en dist/
 #
 # Las recetas usan solo órdenes de Go y funciones de make, para que funcionen
 # igual con GNU make en Linux, macOS y Windows.
@@ -64,7 +64,7 @@ ejemplos:
 	$(GO) test ./cmd/munger -run TestEjemplos -update
 
 # validar y matriz usan herramientas externas que no son necesarias para
-# compilar ni usar munger; son comprobaciones adicionales (tools/LEEME.md).
+# compilar ni usar munger; son comprobaciones adicionales (tools/README.md).
 validar:
 	$(PYTHON) tools/validar.py
 
@@ -74,5 +74,27 @@ validar:
 matriz:
 	"$(BASH)" tools/matriz.sh $(PYTHON)
 
-dist:
-	@echo "dist: pendiente (fase 8)"
+# Plataformas de make dist, como sistema/arquitectura (valores de GOOS/GOARCH).
+PLATAFORMAS = windows/amd64 windows/arm64 linux/amd64 linux/arm64 darwin/amd64 darwin/arm64
+
+# Binario de una plataforma: dist/munger-<sistema>-<arquitectura>, con .exe en Windows.
+binario = dist/munger-$(subst /,-,$(1))$(if $(findstring windows,$(1)),.exe)
+BINARIOS = $(foreach p,$(PLATAFORMAS),$(call binario,$(p)))
+
+.PHONY: $(BINARIOS)
+
+dist: $(BINARIOS)
+
+# Una regla por plataforma. GOOS, GOARCH y CGO_ENABLED se exportan como
+# variables de entorno de la receta, así que no hace falta la sintaxis de
+# ningún intérprete (sh o cmd) para fijarlas. -trimpath quita las rutas de esta
+# máquina del binario y -s -w, la tabla de símbolos y la información de
+# depuración.
+define regla_dist
+$(call binario,$(1)): export GOOS = $(word 1,$(subst /, ,$(1)))
+$(call binario,$(1)): export GOARCH = $(word 2,$(subst /, ,$(1)))
+$(call binario,$(1)): export CGO_ENABLED = 0
+$(call binario,$(1)):
+	$$(GO) build -trimpath -ldflags="-s -w" -o $$@ ./cmd/munger
+endef
+$(foreach p,$(PLATAFORMAS),$(eval $(call regla_dist,$(p))))

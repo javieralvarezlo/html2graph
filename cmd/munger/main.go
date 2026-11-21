@@ -356,16 +356,16 @@ func writeOutputs(opts options, outs [][]byte, stdout io.Writer) error {
 }
 
 // writeOutput escribe out en el fichero path o, si path está vacío, en
-// stdout.
+// stdout. Si falla, el mensaje nombra el fichero, como los de lectura.
 func writeOutput(path string, out []byte, stdout io.Writer) error {
-	var err error
 	if path == "" {
-		_, err = stdout.Write(out)
-	} else {
-		err = os.WriteFile(path, out, 0o644)
+		if _, err := stdout.Write(out); err != nil {
+			return fmt.Errorf("no se puede escribir la salida: %v", err)
+		}
+		return nil
 	}
-	if err != nil {
-		return fmt.Errorf("no se puede escribir la salida: %v", err)
+	if err := os.WriteFile(path, out, 0o644); err != nil {
+		return fmt.Errorf("no se puede escribir «%s»: %v", path, cause(err))
 	}
 
 	return nil

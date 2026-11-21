@@ -69,5 +69,5 @@ for dir in "$T"/*-stdout "$T"/*-o "$T"/*-all; do
 done
 
 echo "TOTAL: $fallos fallos"
-echo "(los avisos no son fallos: son las salidas peculiares; make validar los lista, véase tools/LEEME.md)"
+echo "(los avisos no son fallos: son las salidas peculiares; make validar los lista, véase tools/README.md)"
 [ $fallos = 0 ]
