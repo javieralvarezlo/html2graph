@@ -1,0 +1,1 @@
+munger: ejemplos/error/numero-no-valido.json:1:13: número no válido: no se admiten ceros a la izquierda

@@ -1,0 +1,1 @@
+munger: ejemplos/error/caracter-de-control.html:1:5: carácter de control U+000B no admitido: no puede representarse en las salidas XML; elimínelo del fichero

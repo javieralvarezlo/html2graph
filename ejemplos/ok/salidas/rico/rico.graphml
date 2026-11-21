@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="kind" for="node" attr.name="kind" attr.type="string"/>
+  <graph id="html2graph" edgedefault="directed">
+    <node id="n0"><data key="label">html lang=&quot;es&quot;</data><data key="kind">element</data></node>
+    <node id="n1"><data key="label">head</data><data key="kind">element</data></node>
+    <node id="n2"><data key="label">meta charset=&quot;utf-8&quot;</data><data key="kind">element</data></node>
+    <node id="n3"><data key="label">title</data><data key="kind">element</data></node>
+    <node id="n4"><data key="label">Librería &amp; café</data><data key="kind">text</data></node>
+    <node id="n5"><data key="label">body</data><data key="kind">element</data></node>
+    <node id="n6"><data key="label">h1 id=&quot;inicio&quot;</data><data key="kind">element</data></node>
+    <node id="n7"><data key="label">Novedades</data><data key="kind">text</data></node>
+    <node id="n8"><data key="label">img src=&quot;portada.png&quot; alt=&quot;Portada del mes&quot; width=&quot;120&quot;</data><data key="kind">element</data></node>
+    <node id="n9"><data key="label">p</data><data key="kind">element</data></node>
+    <node id="n10"><data key="label">Precios &lt;con IVA&gt;</data><data key="kind">text</data></node>
+    <node id="n11"><data key="label">br</data><data key="kind">element</data></node>
+    <node id="n12"><data key="label">desde 9,95 €</data><data key="kind">text</data></node>
+    <node id="n13"><data key="label">ul class=&quot;secciones&quot;</data><data key="kind">element</data></node>
+    <node id="n14"><data key="label">li</data><data key="kind">element</data></node>
+    <node id="n15"><data key="label">Novela</data><data key="kind">text</data></node>
+    <node id="n16"><data key="label">li</data><data key="kind">element</data></node>
+    <node id="n17"><data key="label">Ensayo &amp; poesía</data><data key="kind">text</data></node>
+    <node id="n18"><data key="label">table border=&quot;1&quot;</data><data key="kind">element</data></node>
+    <node id="n19"><data key="label">tr</data><data key="kind">element</data></node>
+    <node id="n20"><data key="label">th</data><data key="kind">element</data></node>
+    <node id="n21"><data key="label">Título</data><data key="kind">text</data></node>
+    <node id="n22"><data key="label">th</data><data key="kind">element</data></node>
+    <node id="n23"><data key="label">Precio</data><data key="kind">text</data></node>
+    <node id="n24"><data key="label">tr</data><data key="kind">element</data></node>
+    <node id="n25"><data key="label">td</data><data key="kind">element</data></node>
+    <node id="n26"><data key="label">Niebla</data><data key="kind">text</data></node>
+    <node id="n27"><data key="label">td</data><data key="kind">element</data></node>
+    <node id="n28"><data key="label">12 &amp;euro;</data><data key="kind">text</data></node>
+    <node id="n29"><data key="label">form action=&quot;/pedido&quot; method=&quot;post&quot;</data><data key="kind">element</data></node>
+    <node id="n30"><data key="label">label for=&quot;correo&quot;</data><data key="kind">element</data></node>
+    <node id="n31"><data key="label">Correo</data><data key="kind">text</data></node>
+    <node id="n32"><data key="label">input type=&quot;email&quot; id=&quot;correo&quot; name=&quot;correo&quot; required=&quot;&quot;</data><data key="kind">element</data></node>
+    <node id="n33"><data key="label">input type=&quot;checkbox&quot; name=&quot;aviso&quot; checked=&quot;&quot;</data><data key="kind">element</data></node>
+    <node id="n34"><data key="label">hr</data><data key="kind">element</data></node>
+    <node id="n35"><data key="label">button type=&quot;submit&quot;</data><data key="kind">element</data></node>
+    <node id="n36"><data key="label">Enviar</data><data key="kind">text</data></node>
+    <edge source="n0" target="n1"/>
+    <edge source="n1" target="n2"/>
+    <edge source="n1" target="n3"/>
+    <edge source="n3" target="n4"/>
+    <edge source="n0" target="n5"/>
+    <edge source="n5" target="n6"/>
+    <edge source="n6" target="n7"/>
+    <edge source="n5" target="n8"/>
+    <edge source="n5" target="n9"/>
+    <edge source="n9" target="n10"/>
+    <edge source="n9" target="n11"/>
+    <edge source="n9" target="n12"/>
+    <edge source="n5" target="n13"/>
+    <edge source="n13" target="n14"/>
+    <edge source="n14" target="n15"/>
+    <edge source="n13" target="n16"/>
+    <edge source="n16" target="n17"/>
+    <edge source="n5" target="n18"/>
+    <edge source="n18" target="n19"/>
+    <edge source="n19" target="n20"/>
+    <edge source="n20" target="n21"/>
+    <edge source="n19" target="n22"/>
+    <edge source="n22" target="n23"/>
+    <edge source="n18" target="n24"/>
+    <edge source="n24" target="n25"/>
+    <edge source="n25" target="n26"/>
+    <edge source="n24" target="n27"/>
+    <edge source="n27" target="n28"/>
+    <edge source="n5" target="n29"/>
+    <edge source="n29" target="n30"/>
+    <edge source="n30" target="n31"/>
+    <edge source="n29" target="n32"/>
+    <edge source="n29" target="n33"/>
+    <edge source="n29" target="n34"/>
+    <edge source="n29" target="n35"/>
+    <edge source="n35" target="n36"/>
+  </graph>
+</graphml>

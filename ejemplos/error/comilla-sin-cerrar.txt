@@ -1,0 +1,1 @@
+munger: ejemplos/error/comilla-sin-cerrar.html:1:12: comilla sin cerrar en el valor del atributo 'href'

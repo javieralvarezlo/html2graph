@@ -1,0 +1,37 @@
+nodedef>name VARCHAR,label VARCHAR,kind VARCHAR
+n0,'html',element
+n1,'head',element
+n2,'title',element
+n3,'Hoja de enlaces',text
+n4,'body',element
+n5,'h1',element
+n6,'Ejemplo2',text
+n7,'p',element
+n8,'Este texto tiene un',text
+n9,'a href="http://www.issi.uned.es"',element
+n10,'enlace',text
+n11,'y un texto con',text
+n12,'em',element
+n13,'énfasis',text
+n14,'p',element
+n15,'Este texto NO tiene otro enlace y un texto con',text
+n16,'b',element
+n17,'negrita',text
+edgedef>node1 VARCHAR,node2 VARCHAR,directed BOOLEAN
+n0,n1,true
+n1,n2,true
+n2,n3,true
+n0,n4,true
+n4,n5,true
+n5,n6,true
+n4,n7,true
+n7,n8,true
+n7,n9,true
+n9,n10,true
+n7,n11,true
+n7,n12,true
+n12,n13,true
+n4,n14,true
+n14,n15,true
+n14,n16,true
+n16,n17,true

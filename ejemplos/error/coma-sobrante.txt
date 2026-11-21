@@ -1,0 +1,1 @@
+munger: ejemplos/error/coma-sobrante.json:3:13: coma sobrante: tras ',' se esperaba otra clave y se encontró '}'

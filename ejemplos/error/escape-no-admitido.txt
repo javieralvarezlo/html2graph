@@ -1,0 +1,1 @@
+munger: ejemplos/error/escape-no-admitido.json:1:12: el escape \u0007 produce el carácter de control U+0007, no admitido: no puede representarse en las salidas XML

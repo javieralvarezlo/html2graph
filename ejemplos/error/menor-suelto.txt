@@ -1,0 +1,1 @@
+munger: ejemplos/error/menor-suelto.html:1:10: carácter ' ' (espacio) inválido tras '<' (si es texto, debe escribirse &lt;)

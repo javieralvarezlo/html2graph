@@ -1,0 +1,1 @@
+munger: ejemplos/error/llave-sin-cerrar.json:1:1: '{' sin cerrar: falta '}' antes del final del fichero

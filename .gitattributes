@@ -1,0 +1,4 @@
+# Los ejemplos y las salidas esperadas se comparan byte a byte: Git no debe
+# convertir sus saltos de línea a \r\n al sacarlos en Windows.
+ejemplos/** -text
+internal/writer/testdata/** -text

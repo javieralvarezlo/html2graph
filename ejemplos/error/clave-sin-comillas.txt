@@ -1,0 +1,1 @@
+munger: ejemplos/error/clave-sin-comillas.json:1:2: texto 'nombre' sin comillas: las claves y las cadenas van entre comillas dobles; sin comillas solo se admiten números, true, false y null

@@ -1,0 +1,1 @@
+munger: ejemplos/error/cierre-cruzado.json:1:19: se esperaba ']' para cerrar el '[' abierto en 1:10 y se encontró '}'

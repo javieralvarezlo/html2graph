@@ -1,0 +1,2 @@
+munger: tipo de entrada «xml» inexistente; tipos disponibles: html, json
+Ejecute «munger -h» para ver la ayuda.

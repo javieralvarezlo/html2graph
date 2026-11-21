@@ -1,0 +1,2 @@
+munger: formato de salida «svg» inexistente; formatos disponibles: csv, dot, gdf, gexf, gml, graphml, graphson
+Ejecute «munger -h» para ver la ayuda.

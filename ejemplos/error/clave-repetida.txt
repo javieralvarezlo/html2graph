@@ -1,0 +1,1 @@
+munger: ejemplos/error/clave-repetida.json:4:3: clave "id" repetida (ya aparece en 2:3)

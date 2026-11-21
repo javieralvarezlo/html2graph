@@ -1,0 +1,2 @@
+munger: no se puede deducir el tipo de entrada de «ejemplos/error/extension-desconocida.xml»: la extensión debe ser .html, .htm o .json; si no, indique el tipo con -in html o -in json
+Ejecute «munger -h» para ver la ayuda.

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://gexf.net/1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gexf.net/1.3 http://gexf.net/1.3/gexf.xsd" version="1.3">
+  <meta>
+    <creator>html2graph</creator>
+  </meta>
+  <graph mode="static" defaultedgetype="directed">
+    <attributes class="node">
+      <attribute id="kind" title="kind" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="n0" label="html"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n1" label="head"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n2" label="title"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n3" label="Hoja de enlaces"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n4" label="body"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n5" label="h1"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n6" label="Ejemplo2"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n7" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n8" label="Este texto tiene un"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n9" label="a href=&quot;http://www.issi.uned.es&quot;"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n10" label="enlace"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n11" label="y un texto con"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n12" label="em"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n13" label="énfasis"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n14" label="p"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n15" label="Este texto NO tiene otro enlace y un texto con"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+      <node id="n16" label="b"><attvalues><attvalue for="kind" value="element"/></attvalues></node>
+      <node id="n17" label="negrita"><attvalues><attvalue for="kind" value="text"/></attvalues></node>
+    </nodes>
+    <edges>
+      <edge id="e0" source="n0" target="n1"/>
+      <edge id="e1" source="n1" target="n2"/>
+      <edge id="e2" source="n2" target="n3"/>
+      <edge id="e3" source="n0" target="n4"/>
+      <edge id="e4" source="n4" target="n5"/>
+      <edge id="e5" source="n5" target="n6"/>
+      <edge id="e6" source="n4" target="n7"/>
+      <edge id="e7" source="n7" target="n8"/>
+      <edge id="e8" source="n7" target="n9"/>
+      <edge id="e9" source="n9" target="n10"/>
+      <edge id="e10" source="n7" target="n11"/>
+      <edge id="e11" source="n7" target="n12"/>
+      <edge id="e12" source="n12" target="n13"/>
+      <edge id="e13" source="n4" target="n14"/>
+      <edge id="e14" source="n14" target="n15"/>
+      <edge id="e15" source="n14" target="n16"/>
+      <edge id="e16" source="n16" target="n17"/>
+    </edges>
+  </graph>
+</gexf>

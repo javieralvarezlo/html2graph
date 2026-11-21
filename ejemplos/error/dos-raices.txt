@@ -1,0 +1,1 @@
+munger: ejemplos/error/dos-raices.html:2:1: más de un elemento raíz: <p> aparece después de cerrar <p>

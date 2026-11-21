@@ -1,0 +1,1 @@
+munger: ejemplos/error/contenido-tras-raiz.json:2:1: contenido tras el valor raíz: se esperaba el final del fichero y se encontró '{'
